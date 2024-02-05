@@ -61,10 +61,8 @@ function fetchBooks() {
     })
     .catch((error) => console.error("Error:", error));
 
-  document.getElementById("header-books").hidden = false;
+  document.querySelector("#header-books").innerHTML = "Books";
 }
-
-// fetchBooks();
 
 // Initial fetch to display users when the page loads
 fetchUsers();
