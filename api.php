@@ -9,8 +9,6 @@ $username = "root";
 $password = "";
 $database = "violas_app";
 
-// int, float, double, char, varchar, string, long, bool
-
 $conn = new mysqli($servername, $username, $password, $database);
 
 if ($conn->connect_error) {
@@ -18,12 +16,9 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    //echo "Inside if -get";
-    //echo "\n".$_SERVER['REQUEST_URI'];
-    
+
     // Handle GET requests
     if ($_SERVER['REQUEST_URI'] === '/api.php/users') {
-        //echo "Inside if-if /api/users";
         // Fetch all users from the database
         $result = $conn->query("SELECT * FROM users"); //
 
@@ -41,15 +36,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         // Fetch all books from the database
         $result = $conn->query("
         
-                SELECT
-            b.name AS book_name,
-            a.name AS author_name
+        SELECT
+        b.name AS book_name,
+        a.name AS author_name
         FROM
-            books b
+        books b
         JOIN authors a ON
-            b.author = a.aid;
-                
-                
+        b.author = a.aid;
         
         "); //
 
@@ -62,16 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         header('Content-Type: application/json');
         echo json_encode($books);
     }
-
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Handle POST requests
     if ($_SERVER['REQUEST_URI'] === '/api.php/users') {
 
-        // testing -
-        // echo json_encode(['message' => 'User added successfully - DUMMY']);
-
-        // Add a new user to the database -
-        
         $name = $_POST['fullName'];
         $email = $_POST['email'];
 
