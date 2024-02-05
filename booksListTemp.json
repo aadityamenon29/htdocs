@@ -1,0 +1,23 @@
+[
+  {
+    "bid": "1",
+    "name": "Harry Potter & the half blood prince",
+    "author": "1",
+    "ISBN": "U001",
+    "genre": "Fantasy"
+  },
+  {
+    "bid": "3",
+    "name": "If Tomorrow Comes",
+    "author": "2",
+    "ISBN": "X009",
+    "genre": "Crime Fiction Thriller"
+  },
+  {
+    "bid": "4",
+    "name": "Harry Potter & the order of phoenix",
+    "author": "1",
+    "ISBN": "U004",
+    "genre": "Fantasy Young adult"
+  }
+]
