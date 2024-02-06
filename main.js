@@ -43,6 +43,7 @@ function fetchUsers() {
       });
     })
     .catch((error) => console.error("Error:", error));
+  document.querySelector("#header-users").innerHTML = "Users";
 }
 
 // Fetch and display the list of books
@@ -65,4 +66,4 @@ function fetchBooks() {
 }
 
 // Initial fetch to display users when the page loads
-fetchUsers();
+// fetchUsers();
