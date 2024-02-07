@@ -63,6 +63,8 @@ function fetchBooks() {
     .catch((error) => console.error("Error:", error));
 
   document.querySelector("#header-books").innerHTML = "Books";
+
+  document.querySelector(".test-button").innerHTML = "Test button Click me";
 }
 
 // Initial fetch to display users when the page loads

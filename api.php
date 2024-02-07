@@ -1,5 +1,4 @@
 <?php
-
 // For error displaying purposes.
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
@@ -69,6 +68,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         header('Content-Type: application/json');
         echo json_encode(['message' => 'User added successfully']);
+    } elseif ($_SERVER['REQUEST_URI'] === '/api.php/rental') {
+
+        $user_id = $_POST['userID'];
+        $book_id = $_POST['bookID'];
+        $rental_date = date('Y-m-d');   // default to today's date as rental date
+
+        // default $date_of_return to NULL to signify that the book has not been returned
+
+        $sql = "INSERT INTO rental (user_id, book_id, rental_date, date_of_return) VALUES ('$user_id', '$book_id', '$rental_date', NULL)";
+
+        if ($conn->query($sql) === false) {
+            die("Error in SQL query: " . $conn->error);
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode(
+            [
+                'message' => 'Book rented successfully',
+                'sql' => $sql
+            ]
+        );
     }
 }
 
