@@ -38,6 +38,7 @@ function fetchUsers() {
 
       users.forEach((user) => {
         const listItem = document.createElement("li");
+        listItem.className = "list-group-item";
         listItem.textContent = `${user.fullName} (${user.email})`;
         userList.appendChild(listItem);
       });
@@ -56,6 +57,7 @@ function fetchBooks() {
 
       books.forEach((book) => {
         const listItem = document.createElement("li");
+        listItem.className = "list-group-item";
         listItem.textContent = `${book.book_name} by ${book.author_name}`;
         bookList.appendChild(listItem);
       });
@@ -63,8 +65,6 @@ function fetchBooks() {
     .catch((error) => console.error("Error:", error));
 
   document.querySelector("#header-books").innerHTML = "Books";
-
-  document.querySelector(".test-button").innerHTML = "Test button Click me";
 }
 
 // Initial fetch to display users when the page loads
