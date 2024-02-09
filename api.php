@@ -36,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $result = $conn->query("
         
         SELECT
+        b.bid AS book_id,
         b.name AS book_name,
         a.name AS author_name
         FROM
@@ -86,7 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         echo json_encode(
             [
                 'message' => 'Book rented successfully',
-                'sql' => $sql
             ]
         );
     }
