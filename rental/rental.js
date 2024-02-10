@@ -17,9 +17,8 @@ function populateUsers() {
     .catch((error) => console.error("Error:", error));
 }
 
-// Function to populate books dropdown
-function populateBooks() {
-  fetch("http://localhost/api.php/books")
+function populateAvailableBooks() {
+  fetch("http://localhost/api.php/books/available_books")
     .then((response) => response.json())
     .then((books) => {
       // Clear existing options
@@ -28,12 +27,12 @@ function populateBooks() {
 
       books.forEach((book) => {
         const optionElement = document.createElement("option");
-        optionElement.text = book.book_name + "-" + book.author_name;
-        optionElement.value = book.book_id;
+        optionElement.text =
+          "Book id: " + book.bid + " - " + book.name + "-" + book.ISBN;
+        optionElement.value = book.bid;
         book_dropdown.appendChild(optionElement);
       });
-    })
-    .catch((error) => console.error("Error:", error));
+    });
 }
 
 function submitRental(event) {
@@ -56,6 +55,8 @@ function submitRental(event) {
     .then((response) => response.json())
     .then((data) => {
       alert(data.message); // Display a success message
+      populateAvailableBooks(); // Refresh the book list
+      populateUsers(); // Refresh the user list
     })
     .catch((error) => {
       console.error("Error:", error, error);
@@ -67,5 +68,5 @@ function submitRental(event) {
 
 document.addEventListener("DOMContentLoaded", function () {
   populateUsers(); // Call the function to populate users dropdown
-  populateBooks(); // Call the function to populate books dropdown
+  populateAvailableBooks(); // Call the function to populate books dropdown
 });
