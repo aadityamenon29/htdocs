@@ -31,11 +31,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         echo json_encode($users);
     }
 
+    // Function to fetch available books that are not rented. Use the date_of_return column in rental table to check if the book is available. if date_of_return is empty for given book id, then it is not available else it is available. Also, if there is no row in rental table for given book id, then it is available.
+
+    if ($_SERVER['REQUEST_URI'] === '/api.php/books/available_books') {
+        // Fetch all books from the database
+        $result = $conn->query("
+        
+        SELECT
+        b.*
+        FROM
+        books AS b
+        LEFT JOIN rental AS r
+        ON
+        b.bid = r.book_id
+        GROUP BY
+        b.bid,
+        b.name,
+        b.author,
+        b.ISBN,
+        b.genre
+        HAVING
+        COUNT(DISTINCT r.rental_id) = 0 OR SUM(
+        CASE WHEN r.date_of_return IS NULL THEN 1 ELSE 0
+        END
+        ) = 0;
+        
+        "); //
+
+        if ($result === false) {
+            die("Error in SQL query: " . $conn->error);
+        }
+
+        $books = $result->fetch_all(MYSQLI_ASSOC);
+
+        header('Content-Type: application/json');
+        echo json_encode($books);
+    }
+
+    // Get all books
+
     if ($_SERVER['REQUEST_URI'] === '/api.php/books') {
         // Fetch all books from the database
         $result = $conn->query("
         
         SELECT
+        b.bid AS book_id,
         b.name AS book_name,
         a.name AS author_name
         FROM
@@ -86,7 +126,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         echo json_encode(
             [
                 'message' => 'Book rented successfully',
-                'sql' => $sql
             ]
         );
     }
