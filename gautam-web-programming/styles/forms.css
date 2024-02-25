@@ -1,0 +1,13 @@
+body {
+  background-color: grey;
+}
+
+.label-class {
+  color: hotpink;
+}
+/* This is a css comment */
+h1,
+h3,
+#footer-p {
+  color: burlywood;
+}
